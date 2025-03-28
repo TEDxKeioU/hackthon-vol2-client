@@ -36,7 +36,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React here
+          Learn React here {data ? `: ${data.message}` : ''}
         </a>
       </header>
     </div>
