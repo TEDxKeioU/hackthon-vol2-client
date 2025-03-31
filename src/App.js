@@ -62,6 +62,7 @@ function App() {
         <br />
         {/* Learn React here {data ? `: ${data[data.length - 1].title}` : ''} */}
         <button onClick={() => setSubmitText(inputText)}>submit</button>
+        <br />
     </div>
   );
 }
