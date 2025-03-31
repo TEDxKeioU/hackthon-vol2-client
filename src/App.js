@@ -1,6 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
+<<<<<<< Updated upstream
 import React, { useEffect, useState } from 'react';
+=======
+import Recipe from './pages/recipe';
+import Home from './pages/home';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+>>>>>>> Stashed changes
 
 function App() {
   const [data, setData] = useState(null);
@@ -24,6 +30,7 @@ function App() {
   console.log("Data fetched:", data);
 
   return (
+<<<<<<< Updated upstream
     <div className="App">
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
@@ -41,6 +48,15 @@ function App() {
       </header>
     </div>
   );
+=======
+    <Router>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/recipe" element={<Recipe />} />
+      </Routes>
+    </Router>
+  )
+>>>>>>> Stashed changes
 }
 
 export default App;
