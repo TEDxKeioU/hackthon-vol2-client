@@ -30,13 +30,13 @@ function App() {
         return;
       }
       try {
-        fetch("http://localhost:8000/todo", {
+        fetch("http://localhost:8000/cook", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            title: submitText,
+            ingredients: submitText,
             completed: false,
           }),
         })
@@ -60,7 +60,7 @@ function App() {
           onChange={(e) => setInputText(e.target.value)}
         />
         <br />
-        Learn React here {data ? `: ${data[data.length - 1].title}` : ''}
+        {/* Learn React here {data ? `: ${data[data.length - 1].title}` : ''} */}
         <button onClick={() => setSubmitText(inputText)}>submit</button>
     </div>
   );
