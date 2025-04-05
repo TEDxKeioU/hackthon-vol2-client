@@ -6,6 +6,10 @@ body {
   padding: 0;
 }
 
+body, button, input {
+  font-family: "hiragino Maru Gothic Pro", "ヒラギノ丸ゴ Pro W4", Arial, sans-serif;;
+}
+
 .container {
   display: flex;
   flex-direction: column;

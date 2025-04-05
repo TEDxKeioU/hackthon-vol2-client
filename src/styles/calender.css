@@ -1,87 +1,90 @@
 .container {
-    background-color: #FFF3D4;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 24px;
-  }
-  
-  .title {
-    color: #6B7280;
-    font-size: 14px;
-    margin-bottom: 8px;
-  }
-  
-  .calendar {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 24px;
-  }
-  
-  .sticky-note {
-    background-color: #FFF9C4;
-    padding: 16px;
-    width: 96px;
-    text-align: center;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    position: relative;
-  }
-  
-  .sticky-note::before {
-    content: "";
-    position: absolute;
-    top: -8px;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    width: 16px;
-    height: 16px;
-    background-color: #FFF9C4;
-  }
-  
-  .meal-box {
-    background-color: #FFF9C4;
-    padding: 16px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 320px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .meal {
-    background-color: white;
-    padding: 8px;
-    border-radius: 4px;
-    margin-bottom: 8px;
-  }
-  
-  .record-box {
-    background-color: #FFF9C4;
-    padding: 16px;
-    border-radius: 8px;
-    width: 100%;
-    max-width: 320px;
-    margin-top: 24px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  
-  .input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #D1D5DB;
-    border-radius: 4px;
-    background-color: white;
-  }
-  
-  .button {
-    background-color: #F4C742;
-    width: 100%;
-    margin-top: 8px;
-    padding: 8px;
-    border-radius: 4px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: white;
-    font-weight: bold;
-  }
-  
+  font-family: "hiragino Maru Gothic Pro", "ヒラギノ丸ゴ Pro W4", Arial, sans-serif;
+  background-color: #FFF3D4;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+
+.title {
+  color: #6B7280;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.calendar {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.sticky-note {
+  background-color: #FFF9C4;
+  padding: 12px;
+  width: calc(100% - 60px);
+  text-align: center;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  font-size: 0.8rem;
+}
+
+.sticky-note::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(45deg);
+  width: 16px;
+  height: 16px;
+  background-color: #FFF9C4;
+}
+
+.meal-box {
+  background-color: #FFF9C4;
+  padding: 16px;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 320px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.meal {
+  background-color: white;
+  padding: 8px;
+  border-radius: 4px;
+  margin-bottom: 8px;
+}
+
+.record-box {
+  background-color: #FFF9C4;
+  padding: 16px;
+  border-radius: 8px;
+  width: 80%;
+  /* max-width: 320px; */
+  margin-top: 24px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.input {
+  width: 80%;
+  padding: 8px;
+  border: 1px solid #D1D5DB;
+  border-radius: 4px;
+  background-color: white;
+}
+
+.button {
+  background-color: #F4C742;
+  width: 80%;
+  margin-top: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  border-color: #fec007;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  color: white;
+  font-weight: bold;
+}
