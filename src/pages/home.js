@@ -113,6 +113,20 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
+      <div className={styles.header}>
+        <div className={styles.calender_wrapper}>
+          <button 
+            onClick={() => navigate('/calender')}
+            className={styles.calender_button}
+          >カレンダー</button>
+        </div>
+        <div className={styles.login_wrapper}>
+          <button 
+            onClick={() => navigate('/login')}
+            className={styles.login_button}
+          >ログイン</button>
+        </div>
+      </div>
       <div className={styles.weather_box}>
         <div className={styles.weather_label}>今日の天気</div>
         {loading ? (

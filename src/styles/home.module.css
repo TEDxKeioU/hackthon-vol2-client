@@ -192,3 +192,35 @@ body, button, input {
   padding-left: 20px;
   color: #555;
 }
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  width: 250px;
+}
+
+.calender_button, .login_button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffcc00;
+  color: white;
+  font-size: 11px;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.calender_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
