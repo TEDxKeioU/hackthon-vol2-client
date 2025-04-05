@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./calender.css";
+import "../styles/calender.css";
 
 const Calender = () => {
   const [meals, setMeals] = useState({
