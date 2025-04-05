@@ -1,0 +1,16 @@
+.response {
+  color: #f89710;
+}
+
+.recipe_button {
+  background-color: #ffcc00;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}

@@ -1,0 +1,190 @@
+body {
+  background-color: #fff9db;
+  font-family: "hiragino Maru Gothic Pro", "ヒラギノ丸ゴ Pro W4", Arial, sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.weather_box, .mode_box {
+  position: relative;
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 250px;
+  height: 80px;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.weather_icon {
+  font-size: 24px;
+}
+
+.weather_label {
+  text-align: left;
+  font-size: 0.9rem;
+  color: #665C43;
+  margin-bottom: 5px;
+}
+
+.weather_content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.weather_left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.weather_right {
+  text-align: right;
+}
+.weather_text {
+  font-size: 0.75rem;
+}
+
+.mode_title {
+  /* text-align: left;
+  font-size: 0.9rem;
+  color: #665C43;
+  margin-bottom: 5px;
+  position: absolute;
+  left: 15px; */
+  text-align: left;
+  font-size: 0.9rem;
+  color: #665C43;
+  margin: 0px 0px 10px 0px;
+}
+
+.mode_buttons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mode_button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffcc00;
+  color: white;
+  font-size: 11px;
+  width: 30%;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.mode_button:active {
+  background-color: #e6b800;
+  color: black;
+}
+
+.mode_selected {
+  margin: 10px 0px;
+  color: #665C43;
+  align-items: center;
+  font-size: 11px;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.recipe_button {
+  background-color: #ffcc00;
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  margin-bottom: 15px;
+  transition: 0.3s;
+}
+
+.recipe_button:hover {
+  background-color: #e6b800;
+}
+
+.ingredients_box {
+  background: white;
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
+  width: 250px;
+}
+
+.ingredient_section {
+  margin-bottom: 15px;
+}
+
+.ingredient_title {
+  font-weight: normal;
+  text-align: left;
+  font-size: 0.9rem;
+  color: #665C43;
+  margin-bottom: 5px;
+}
+
+.ingredient_input {
+  width: calc(100% - 80px);
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  margin-bottom: 5px;
+}
+
+.add_button {
+  background-color: #ffcc00;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ingredient_list {
+  list-style-type: disc;
+  text-align: left;
+  padding-left: 20px;
+  color: #665C43;
+}
+
+.delete_button {
+  background-color: #ffe47a;
+  color: white;
+  border: none;
+  width: auto;
+  height: auto;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: 0.3s;
+  margin: 0px 0px 0px 0px;
+  padding: 5px 10px 5px 10px;
+}
+
+.add_button:hover {
+  background-color: #e6b800;
+}
+
+.ingredient_list {
+  list-style-type: disc;
+  text-align: left;
+  padding-left: 20px;
+  color: #555;
+}
