@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./MealTracker.css";
+import "./calender.css";
 
-const MealTracker = () => {
+const Calender = () => {
   const [meals, setMeals] = useState({
     breakfast: "納豆ご飯",
     lunch: "チンジャオロース",
@@ -54,4 +54,4 @@ const MealTracker = () => {
   );
 };
 
-export default MealTracker;
+export default Calender;

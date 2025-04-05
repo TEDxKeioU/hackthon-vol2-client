@@ -3,6 +3,7 @@ import './App.css';
 import Recipe from './pages/recipe';
 import Home from './pages/home';
 // import WeatherInfo from './pages/weather';
+import Cld from './pages/calander';
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/recipe" element={<Recipe />} />
         {/* <Route path="/weather" element={<WeatherInfo />} /> */}
+        <Route path='/calender' element={<Cld />} />
       </Routes>
     </Router>
   )
