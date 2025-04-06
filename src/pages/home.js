@@ -1,9 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../styles/home.module.css";
-import { WeatherInfo } from "./weather";
+import { useAuth } from "../context/AuthContext";
 
 export default function Home() {
+  const { isLoggedIn, email, logout } = useAuth();
+
   const [submitText, setSubmitText] = useState("");
   const [inputText, setInputText] = useState("");
   const [avoidIngredient, setAvoidIngredient] = useState("");
@@ -113,20 +115,35 @@ export default function Home() {
 
   return (
     <div className={styles.container}>
-      <div className={styles.header}>
+      <header>
+        {/* 左：カレンダー */}
         <div className={styles.calender_wrapper}>
           <button 
             onClick={() => navigate('/calender')}
             className={styles.calender_button}
-          >カレンダー</button>
+          >Calendar</button>
         </div>
+
+        {/* 真ん中：メールアドレス（ログイン時のみ） */}
+        <div className={styles.center_content}>
+          {isLoggedIn && <span className={styles.user_email}>👤<br/> {email}</span>}
+        </div>
+
+        {/* 右：ログイン or ログアウト */}
         <div className={styles.login_wrapper}>
-          <button 
-            onClick={() => navigate('/login')}
-            className={styles.login_button}
-          >ログイン</button>
+          {isLoggedIn ? (
+            <button 
+              onClick={logout}
+              className={styles.logout_button}
+            >Logout</button>
+          ) : (
+            <button 
+              onClick={() => navigate('/login')}
+              className={styles.login_button}
+            >Login/Signup</button>
+          )}
         </div>
-      </div>
+      </header>
       <div className={styles.weather_box}>
         <div className={styles.weather_label}>今日の天気</div>
         {loading ? (
