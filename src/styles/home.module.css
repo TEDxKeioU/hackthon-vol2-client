@@ -200,13 +200,13 @@ body, button, input {
   width: 250px;
 }
 
-.calender_button, .login_button {
+.calender_button, .login_button, .signup_button {
   padding: 10px 15px;
   border: none;
   border-radius: 10px;
   background-color: #ffcc00;
   color: white;
-  font-size: 11px;
+  font-size: 12px;
   width: 100%;
   font-weight: bold;
   cursor: pointer;
@@ -223,4 +223,51 @@ body, button, input {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.user_info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+
+.logout_button {
+  padding: 8px 15px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffcc00;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.logout_button:hover {
+  background-color: #e6b800;
+}
+
+header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  padding: 10px;
+}
+
+.calender_wrapper {
+  justify-self: start;
+}
+
+.center_content {
+  justify-self: center;
+  margin: 0 10px 0 10px;
+}
+
+.login_wrapper {
+  justify-self: end;
+}
+
+.user_email {
+  font-weight: bold;
 }

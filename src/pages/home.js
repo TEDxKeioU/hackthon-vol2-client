@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
+import styles from "../styles/home.module.css";
+import { useAuth } from "../context/AuthContext";
 import { 
   Box, 
   Container, 
@@ -17,11 +20,12 @@ import {
   createTheme,
   CssBaseline,
   ToggleButtonGroup,
-  ToggleButton
+  ToggleButton,
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import LoginIcon from '@mui/icons-material/Login';
+import LogoutIcon from '@mui/icons-material/Logout';
 import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
@@ -68,6 +72,8 @@ const theme = createTheme({
 });
 
 export default function Home() {
+  const { isLoggedIn, email, logout } = useAuth();
+
   const [submitText, setSubmitText] = useState("");
   const [inputText, setInputText] = useState("");
   const [avoidIngredient, setAvoidIngredient] = useState("");
@@ -208,7 +214,15 @@ export default function Home() {
     <ThemeProvider theme={theme}>
       <CssBaseline />
       <Container maxWidth="sm" sx={{ py: 3 }}>
-        <Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between' }}>
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            mb: 3 
+          }}
+        >
+          {/* 左：カレンダー */}
           <Button 
             variant="contained"
             startIcon={<CalendarMonthIcon />}
@@ -217,16 +231,27 @@ export default function Home() {
           >
             カレンダー
           </Button>
+
+          {/* 真ん中：ログイン中のメール表示 */}
+          <Box sx={{ flex: 1, textAlign: 'center' }}>
+            {isLoggedIn && (
+              <Box>
+                <span role="img" aria-label="user">👤</span><br />
+                <span>{email}</span>
+              </Box>
+            )}
+          </Box>
+
+          {/* 右：ログイン／ログアウト */}
           <Button 
             variant="contained"
-            startIcon={<LoginIcon />}
-            onClick={() => navigate('/login')}
+            startIcon={isLoggedIn ? <LogoutIcon /> : <LoginIcon />}
+            onClick={isLoggedIn ? logout : () => navigate('/login')}
             sx={{ flex: 1, ml: 1 }}
           >
-            ログイン
+            {isLoggedIn ? 'ログアウト' : 'ログイン'}
           </Button>
         </Box>
-
         <Paper elevation={2} sx={{ p: 2, mb: 2 }}>
           <Typography variant="subtitle2" color="secondary" align="left" gutterBottom>
             今日の天気
