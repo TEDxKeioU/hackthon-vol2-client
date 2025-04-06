@@ -82,6 +82,9 @@ export default function Login() {
             Sign Up here
           </span>
         </div>
+        <div className={styles.quit_button}>
+          <button onClick={() => navigate("/")} className={styles.quit_button}>Quit</button>
+        </div>
       </div>
     </>
   )

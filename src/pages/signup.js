@@ -138,6 +138,9 @@ export default function Signup() {
         </p>
       </form>
       {returnMessage && <div className={styles.return_message}>{returnMessage}</div>}
+      <div className={styles.quit_button}>
+        <button onClick={() => navigate("/")} className={styles.quit_button}>Quit</button>
+      </div>
     </div>
   );
 }

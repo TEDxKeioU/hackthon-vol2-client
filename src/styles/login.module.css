@@ -51,3 +51,15 @@
   box-shadow: 0 2px 4px rgba(255, 204, 0, 0.4);
   transform: translateY(-1px);
 }
+.notification_message {
+  margin-bottom: 5px;
+}
+.quit_button {
+  background-color: #ffcc00;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
