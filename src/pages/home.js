@@ -408,15 +408,6 @@ export default function Home() {
         >
           ポチッとレシピ！
         </Button>
-
-        <Paper elevation={1} sx={{ p: 1, mb: 2, bgcolor: 'rgba(255,255,255,0.7)' }}>
-          <Typography variant="caption" component="div" align="left">
-            現在の選択肢: {inputText}
-          </Typography>
-          <Typography variant="caption" component="div" align="left">
-            送信するテキスト: {submitText}
-          </Typography>
-        </Paper>
       </Container>
     </ThemeProvider>
   );

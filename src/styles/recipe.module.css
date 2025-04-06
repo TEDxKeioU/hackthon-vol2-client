@@ -1,70 +1,178 @@
-.response {
-  color: #f89710;
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Hiragino Maru Gothic Pro", "ヒラギノ丸ゴ Pro W4", "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体", sans-serif;
+  color: #333;
+  background-color: #fffdf7;
+  border-radius: 15px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
 }
 
-.recipe_top{
-  margin-bottom: 0px;
+.header {
+  text-align: center;
+  margin-bottom: 25px;
+  border-bottom: 2px dashed #ffcc00;
+  padding-bottom: 15px;
 }
-.recipe_button {
-  background-color: #ffcc00;
+
+.recipeTitle {
+  color: #e05d1e;
+  font-size: 32px;
+  margin: 0;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+/* Loading animation */
+.loadingContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.loader {
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid #ffcc00;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loadingText {
+  color: #666;
+  font-size: 18px;
+}
+
+/* Recipe content styling */
+.recipeContent {
+  background-color: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+.recipeContent h1,
+.recipeContent h2 {
+  color: #e05d1e;
+  border-bottom: 2px solid #ffcc00;
+  padding-bottom: 8px;
+  margin-top: 25px;
+  margin-bottom: 15px;
+  font-size: 22px;
+}
+
+.recipeContent ul,
+.recipeContent ol {
+  background-color: #fff;
+  padding: 15px 15px 15px 35px;
+  border-radius: 8px;
+  margin: 15px 0;
+  border-left: 4px solid #ffcc00;
+}
+
+.recipeContent li {
+  margin-bottom: 12px;
+  padding-left: 5px;
+}
+
+.recipeContent p {
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 8px;
+  margin: 15px 0;
+  line-height: 1.8;
+}
+
+/* Ingredients section special styling */
+.recipeContent ul:first-of-type {
+  background-color: #fffaeb;
+  border-left: 4px solid #ffcc00;
+}
+
+/* Steps section special styling */
+.recipeContent ol {
+  background-color: #f9f9f9;
+  counter-reset: step-counter;
+  list-style: none;
+  border-left: 4px solid #e05d1e;
+}
+
+.recipeContent ol li {
+  position: relative;
+  padding-left: 35px;
+}
+
+.recipeContent ol li::before {
+  content: counter(step-counter);
+  counter-increment: step-counter;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background-color: #e05d1e;
+  color: white;
+  font-weight: bold;
+  font-size: 14px;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Button styling */
+.buttonContainer {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.backButton {
+  background-color: #e05d1e;
   color: white;
   font-size: 16px;
   font-weight: bold;
-  padding: 10px 20px;
-  border-radius: 10px;
+  padding: 12px 30px;
+  border-radius: 50px;
   border: none;
   cursor: pointer;
-  margin-bottom: 15px;
-  transition: 0.3s;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 8px rgba(224, 93, 30, 0.3);
 }
 
-.markdown_body {
-  background-color: #fff8dc; /* 背景色を薄い黄色に設定 */
-  padding: 20px; /* 内側の余白 */
-  margin: 20px auto; /* 上下に余白を追加し、中央揃え */
-  margin-top: 0px;
-  margin-bottom: 0px;
-  border-radius: 10px; /* 角を丸くする */
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 軽い影を追加 */
-  font-family: "Hiragino Maru Gothic Pro", "ヒラギノ丸ゴ Pro W4", Arial, sans-serif; /* フォントを指定 */
-  color: #333; /* 文字色を濃いグレーに設定 */
-  line-height: 1.8; /* 行間を広げる */
-  font-size: 16px; /* 文字サイズを調整 */
-  text-align: left; /* テキストを左揃え */
+.backButton:hover {
+  background-color: #c94d12;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(224, 93, 30, 0.4);
 }
 
-.markdown_body h1 {
-  font-size: 24px; /* 見出しの文字サイズ */
-  color: #000; /* 見出しの文字色 */
-  margin-top: 0px;
-  margin-bottom: 0px; /* 見出しの下に余白を追加 */
-  font-family: "Hiragino Maru Gothic Pro", "ヒラギノ丸ゴ Pro W4", Arial, sans-serif; /* 丸ゴシックを指定 */
+.backButton:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(224, 93, 30, 0.4);
 }
 
-.markdown_body ul {
-  padding-left: 20px; /* リストのインデント */
-  margin-bottom: 15px; /* リストの下に余白を追加 */
-  background-color: #ffffff; /* 白い背景 */
-  border-radius: 10px; /* 角を丸くする */
-  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 軽い影を追加 */
-}
-
-.markdown_body li {
-  margin-bottom: 13px; /* リスト項目間の余白 */
-}
-
-.markdown_body p {
-  background-color: #ffffff; /* 白い背景 */
-  padding: 20px; /* 内側の余白 */
-  /* margin-bottom: 20px; セクション間の余白 */
-  border-radius: 10px; /* 角を丸くする */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
-}
-
-.markdown_body ol {
-  background-color: #ffffff; /* 白い背景 */
-  padding: 20px; /* 内側の余白 */
-  /* margin-bottom: 20px; セクション間の余白 */
-  border-radius: 10px; /* 角を丸くする */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+  
+  .recipeContent {
+    padding: 15px;
+  }
+  
+  .recipeTitle {
+    font-size: 24px;
+  }
 }
