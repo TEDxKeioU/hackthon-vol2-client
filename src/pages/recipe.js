@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import styles from "../styles/recipe.module.css";
 import Markdown from "react-markdown";
 import { useNavigate } from "react-router-dom";
+import parse from 'html-react-parser';
 
 export default function Recipe() {
   const [recipe, setRecipe] = useState(null);
@@ -43,11 +44,13 @@ export default function Recipe() {
   return (
     <>
       <div>
-        <h1>レシピ</h1>
+        <h1 className={styles.recipe_top}>レシピ</h1>
         {loading ? (
           <p>loading...</p>
         ) : (
-          <Markdown>{recipe}</Markdown>
+          <div className={styles.markdown_body}>
+            {parse(recipe)}
+          </div>
         )}
       </div>
       <button

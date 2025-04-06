@@ -1,7 +1,74 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+
 import styles from "../styles/home.module.css";
 import { useAuth } from "../context/AuthContext";
+import { 
+  Box, 
+  Container, 
+  Typography, 
+  Button, 
+  TextField, 
+  Paper, 
+  Grid,
+  List,
+  ListItem,
+  ListItemText,
+  IconButton,
+  Chip,
+  ThemeProvider,
+  createTheme,
+  CssBaseline,
+  ToggleButtonGroup,
+  ToggleButton
+} from "@mui/material";
+import DeleteIcon from '@mui/icons-material/Delete';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import LoginIcon from '@mui/icons-material/Login';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import WbSunnyIcon from '@mui/icons-material/WbSunny';
+import AcUnitIcon from '@mui/icons-material/AcUnit';
+import ThermostatIcon from '@mui/icons-material/Thermostat';
+
+// カスタムテーマの作成
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: '#ffcc00',
+    },
+    secondary: {
+      main: '#665C43',
+    },
+    background: {
+      default: '#fff9db',
+      paper: '#ffffff',
+    },
+  },
+  typography: {
+    fontFamily: '"Hiragino Maru Gothic Pro", "ヒラギノ丸ゴ Pro W4", Arial, sans-serif',
+    button: {
+      textTransform: 'none',
+      fontWeight: 'bold',
+    },
+  },
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          borderRadius: 10,
+        },
+      },
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: 10,
+          boxShadow: '2px 2px 10px rgba(0, 0, 0, 0.1)',
+        },
+      },
+    },
+  },
+});
 
 export default function Home() {
   const { isLoggedIn, email, logout } = useAuth();
@@ -20,13 +87,11 @@ export default function Home() {
   const [cookingTime, setCookingTime] = useState("10分以内");
   const navigate = useNavigate();
 
-
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
   const API_KEY = "5357ea3fecf3393c86c63b1fbe28fac0";
 
-  // cookへのPOSTリクエスト
   useEffect(() => {
     async function postData() {
       if (submitText === "" && !submitText) {
@@ -50,7 +115,6 @@ export default function Home() {
     postData();
   }, [submitText]);
 
-  // 送信用のテキストを更新
   useEffect(() => {
     function combineText() {
       const modeKey = selectedMode ? modes.indexOf(selectedMode) : 0;
@@ -69,8 +133,6 @@ export default function Home() {
     }
     combineText();
   }, [wantIngredientList, avoidIngredientList, temp, cookingTime, selectedMode]);
-
-  
 
   useEffect(() => {
     if (navigator.geolocation) {
@@ -113,162 +175,248 @@ export default function Home() {
     return "🥵 めっちゃ暑い！";
   };
 
+  const getTemperatureIcon = (temp) => {
+    if (temp <= 15) return <AcUnitIcon fontSize="small" />;
+    if (temp <= 25) return <ThermostatIcon fontSize="small" />;
+    return <WbSunnyIcon fontSize="small" />;
+  };
+
+  const handleModeChange = (event, newMode) => {
+    setSelectedMode(newMode);
+  };
+
+  const addWantIngredient = () => {
+    if (wantIngredient.trim() !== "") {
+      setWantIngredientList(prev => [...prev, wantIngredient]);
+      setWantIngredient("");
+    }
+  };
+
+  const addAvoidIngredient = () => {
+    if (avoidIngredient.trim() !== "") {
+      setAvoidIngredientList(prev => [...prev, avoidIngredient]);
+      setAvoidIngredient("");
+    }
+  };
+
+  const handleFindRecipe = () => {
+    setSubmitText(inputText);
+    setInputText(""); 
+    setAvoidIngredient(""); 
+    setWantIngredient(""); 
+    setTemp(21); 
+    setCookingTime("10分以内");
+    navigate('/recipe');
+  };
+
   return (
-    <div className={styles.container}>
-      <header>
-        {/* 左：カレンダー */}
-        <div className={styles.calender_wrapper}>
-          <button 
+    <ThemeProvider theme={theme}>
+      <CssBaseline />
+      <Container maxWidth="sm" sx={{ py: 3 }}>
+        <Box 
+          sx={{ 
+            display: 'flex', 
+            justifyContent: 'space-between', 
+            alignItems: 'center', 
+            mb: 3 
+          }}
+        >
+          {/* 左：カレンダー */}
+          <Button 
+            variant="contained"
+            startIcon={<CalendarMonthIcon />}
             onClick={() => navigate('/calender')}
-            className={styles.calender_button}
-          >Calendar</button>
-        </div>
+            sx={{ flex: 1, mr: 1 }}
+          >
+            カレンダー
+          </Button>
 
-        {/* 真ん中：メールアドレス（ログイン時のみ） */}
-        <div className={styles.center_content}>
-          {isLoggedIn && <span className={styles.user_email}>👤<br/> {email}</span>}
-        </div>
+          {/* 真ん中：ログイン中のメール表示 */}
+          <Box sx={{ flex: 1, textAlign: 'center' }}>
+            {isLoggedIn && (
+              <Box>
+                <span role="img" aria-label="user">👤</span><br />
+                <span>{email}</span>
+              </Box>
+            )}
+          </Box>
 
-        {/* 右：ログイン or ログアウト */}
-        <div className={styles.login_wrapper}>
-          {isLoggedIn ? (
-            <button 
-              onClick={logout}
-              className={styles.logout_button}
-            >Logout</button>
-          ) : (
-            <button 
-              onClick={() => navigate('/login')}
-              className={styles.login_button}
-            >Login/Signup</button>
-          )}
-        </div>
-      </header>
-      <div className={styles.weather_box}>
-        <div className={styles.weather_label}>今日の天気</div>
-        {loading ? (
-          <p>取得中だよ！</p>
-        ) : weather ?(
-          <div className={styles.weather_content}>
-            <div className={styles.weather_left}>
-              <span className={styles.weather_icon}>
+          {/* 右：ログイン／ログアウト */}
+          <Button 
+            variant="contained"
+            startIcon={isLoggedIn ? <LogoutIcon /> : <LoginIcon />}
+            onClick={isLoggedIn ? logout : () => navigate('/login')}
+            sx={{ flex: 1, ml: 1 }}
+          >
+            {isLoggedIn ? 'ログアウト' : 'ログイン'}
+          </Button>
+        </Box>
+        <Paper elevation={2} sx={{ p: 2, mb: 2 }}>
+          <Typography variant="subtitle2" color="secondary" align="left" gutterBottom>
+            今日の天気
+          </Typography>
+          {loading ? (
+            <Typography>取得中だよ！</Typography>
+          ) : weather ? (
+            <Grid container alignItems="center" spacing={1}>
+              <Grid item xs={6} sx={{ display: 'flex', alignItems: 'center' }}>
                 {weather && weather.weather && (
-                  <img
-                    src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
-                    alt="天気アイコン"
-                    width="50" height="50"
-                  />
+                  <>
+                    <img
+                      src={`https://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
+                      alt="天気アイコン"
+                      width="40" height="40"
+                    />
+                    <Typography variant="body2">{weather.weather[0].description}</Typography>
+                  </>
                 )}
-              </span>
-              <span className={styles.weather_text}>{weather.weather[0].description}</span>
-            </div>
-            <div className={styles.weather_right}>
-              <span className={styles.weather_text}>{temp}° {getTemperatureFeeling(temp)}</span>
-            </div>
-          </div>
-        ) : (
-          <p>天気情報を取得できませんでした。</p>
-        )}
-      </div>
-      <div className={styles.mode_box}>
-        <p className={styles.mode_title}>mode</p>
-        <div className={styles.mode_buttons}>
-          {modes.map((mode, index) => (
-            <button
-              key={index}
-              className={`${styles.mode_button} ${selectedMode === mode ? styles.mode_button.active : ""}`}
-              onClick={() => setSelectedMode(mode === selectedMode ? null : mode)}
-            >
-              {mode}
-            </button>
-          ))}
-        </div>
-        <div className={styles.mode_selected}>
-          mode now: {selectedMode}
-        </div>
-      </div>
+              </Grid>
+              <Grid item xs={6} sx={{ textAlign: 'right' }}>
+                <Chip 
+                  icon={getTemperatureIcon(temp)}
+                  label={`${temp}° ${getTemperatureFeeling(temp)}`}
+                  size="small"
+                  variant="outlined"
+                />
+              </Grid>
+            </Grid>
+          ) : (
+            <Typography>天気情報を取得できませんでした。</Typography>
+          )}
+        </Paper>
 
-      <button onClick={() => {
-          setSubmitText(inputText);
-          setInputText(""); setAvoidIngredient(""); setWantIngredient(""); setTemp(21); setCookingTime("10分以内");
-          navigate('/recipe');
-        }}
-        className={styles.recipe_button}
-      >ポチッとレシピ！</button>
+        <Paper elevation={2} sx={{ p: 2, mb: 2 }}>
+          <Typography variant="subtitle2" color="secondary" align="left" gutterBottom>
+            モード
+          </Typography>
+          <ToggleButtonGroup
+            value={selectedMode}
+            exclusive
+            onChange={handleModeChange}
+            aria-label="cooking mode"
+            fullWidth
+            size="small"
+          >
+            {modes.map((mode) => (
+              <ToggleButton key={mode} value={mode}>
+                {mode}
+              </ToggleButton>
+            ))}
+          </ToggleButtonGroup>
+        </Paper>
 
-      <div className={styles.ingredients_box}>
-        <div className={styles.ingredient_section}>
-          <p className={styles.ingredient_title}>使いたい食材</p>
-          <input
-            type="text"
-            placeholder="使いたい食材を入れてね"
-            value={wantIngredient}
-            onChange={(e) => setWantIngredient(e.target.value)}
-            className={styles.ingredient_input}
-          />
-          <button onClick={() => {
-              if (wantIngredient.trim() !== "") {
-                setWantIngredientList(prev => [...prev, wantIngredient]);
-                setWantIngredient("");
-              }
-            }}
-            className={styles.add_button}
-          >
-            追加
-          </button>
-          <br />
-          {wantIngredientList.map((wantItem, key) => {
-            return (
-              <div key={key} className={styles.ingredient_list}>
-                ・{wantItem}
-                <button onClick={() => {
-                    setWantIngredientList(prev => prev.filter(item => item !== wantItem));
-                  }}
-                  className={styles.delete_button}
-                >×</button>
-              </div>
-            )
-          })}
-        </div>
-        <div className={styles.ingredient_section}>
-          <p className={styles.ingredient_title}>避けたい食材</p>
-          <input
-            type="text"
-            placeholder="避けたい食材を入れてね"
-            value={avoidIngredient}
-            onChange={(e) => setAvoidIngredient(e.target.value)}
-            className={styles.ingredient_input}
-          />
-          <button onClick={() => {
-              if (avoidIngredient.trim() !== "") {
-                setAvoidIngredientList(prev => [...prev, avoidIngredient]);
-                setAvoidIngredient("");
-              }
-            }}
-            className={styles.add_button}
-          >
-            追加
-          </button>
-          <br />
-          {avoidIngredientList.map((avoidItem, key) => {
-            return (
-              <div key={key} className={styles.ingredient_list}>
-                ・{avoidItem}
-                <button onClick={() => {
-                    setAvoidIngredientList(prev => prev.filter(item => item !== avoidItem));
-                  }}
-                  className={styles.delete_button}
-                >×</button>
-              </div>
-            )
-          })}
-        </div>
-      </div>
-      
-      <br />
-      現在の選択肢: {inputText}
-      <br />
-      送信するテキスト: {submitText}
-    </div>
-  )
+        <Paper elevation={2} sx={{ p: 2, mb: 2 }}>
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="subtitle2" color="secondary" align="left" gutterBottom>
+              使いたい食材
+            </Typography>
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
+                <TextField
+                  fullWidth
+                  size="small"
+                  placeholder="使いたい食材を入れてね"
+                  value={wantIngredient}
+                  onChange={(e) => setWantIngredient(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && addWantIngredient()}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <Button 
+                  variant="contained"
+                  onClick={addWantIngredient}
+                  fullWidth
+                >
+                  追加
+                </Button>
+              </Grid>
+            </Grid>
+            <List dense>
+              {wantIngredientList.map((item, index) => (
+                <ListItem 
+                  key={index}
+                  secondaryAction={
+                    <IconButton 
+                      edge="end" 
+                      size="small"
+                      onClick={() => setWantIngredientList(prev => prev.filter((_, i) => i !== index))}
+                    >
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
+                  }
+                >
+                  <ListItemText primary={item} />
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+
+          <Box>
+            <Typography variant="subtitle2" color="secondary" align="left" gutterBottom>
+              避けたい食材
+            </Typography>
+            <Grid container spacing={1}>
+              <Grid item xs={8}>
+                <TextField
+                  fullWidth
+                  size="small"
+                  placeholder="避けたい食材を入れてね"
+                  value={avoidIngredient}
+                  onChange={(e) => setAvoidIngredient(e.target.value)}
+                  onKeyPress={(e) => e.key === 'Enter' && addAvoidIngredient()}
+                />
+              </Grid>
+              <Grid item xs={4}>
+                <Button 
+                  variant="contained"
+                  onClick={addAvoidIngredient}
+                  fullWidth
+                >
+                  追加
+                </Button>
+              </Grid>
+            </Grid>
+            <List dense>
+              {avoidIngredientList.map((item, index) => (
+                <ListItem 
+                  key={index}
+                  secondaryAction={
+                    <IconButton 
+                      edge="end" 
+                      size="small"
+                      onClick={() => setAvoidIngredientList(prev => prev.filter((_, i) => i !== index))}
+                    >
+                      <DeleteIcon fontSize="small" />
+                    </IconButton>
+                  }
+                >
+                  <ListItemText primary={item} />
+                </ListItem>
+              ))}
+            </List>
+          </Box>
+        </Paper>
+
+        <Button 
+          variant="contained" 
+          size="large"
+          startIcon={<RestaurantMenuIcon />}
+          onClick={handleFindRecipe}
+          sx={{ mb: 2, py: 1 }}
+          fullWidth
+        >
+          ポチッとレシピ！
+        </Button>
+
+        <Paper elevation={1} sx={{ p: 1, mb: 2, bgcolor: 'rgba(255,255,255,0.7)' }}>
+          <Typography variant="caption" component="div" align="left">
+            現在の選択肢: {inputText}
+          </Typography>
+          <Typography variant="caption" component="div" align="left">
+            送信するテキスト: {submitText}
+          </Typography>
+        </Paper>
+      </Container>
+    </ThemeProvider>
+  );
 }
