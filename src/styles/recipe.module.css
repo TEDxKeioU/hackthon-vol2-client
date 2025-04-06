@@ -2,6 +2,9 @@
   color: #f89710;
 }
 
+.recipe_top{
+  margin-bottom: 0px;
+}
 .recipe_button {
   background-color: #ffcc00;
   color: white;
@@ -13,4 +16,55 @@
   cursor: pointer;
   margin-bottom: 15px;
   transition: 0.3s;
+}
+
+.markdown_body {
+  background-color: #fff8dc; /* 背景色を薄い黄色に設定 */
+  padding: 20px; /* 内側の余白 */
+  margin: 20px auto; /* 上下に余白を追加し、中央揃え */
+  margin-top: 0px;
+  margin-bottom: 0px;
+  border-radius: 10px; /* 角を丸くする */
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 軽い影を追加 */
+  font-family: "Hiragino Maru Gothic Pro", "ヒラギノ丸ゴ Pro W4", Arial, sans-serif; /* フォントを指定 */
+  color: #333; /* 文字色を濃いグレーに設定 */
+  line-height: 1.8; /* 行間を広げる */
+  font-size: 16px; /* 文字サイズを調整 */
+  text-align: left; /* テキストを左揃え */
+}
+
+.markdown_body h1 {
+  font-size: 24px; /* 見出しの文字サイズ */
+  color: #000; /* 見出しの文字色 */
+  margin-top: 0px;
+  margin-bottom: 0px; /* 見出しの下に余白を追加 */
+  font-family: "Hiragino Maru Gothic Pro", "ヒラギノ丸ゴ Pro W4", Arial, sans-serif; /* 丸ゴシックを指定 */
+}
+
+.markdown_body ul {
+  padding-left: 20px; /* リストのインデント */
+  margin-bottom: 15px; /* リストの下に余白を追加 */
+  background-color: #ffffff; /* 白い背景 */
+  border-radius: 10px; /* 角を丸くする */
+  /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 軽い影を追加 */
+}
+
+.markdown_body li {
+  margin-bottom: 13px; /* リスト項目間の余白 */
+}
+
+.markdown_body p {
+  background-color: #ffffff; /* 白い背景 */
+  padding: 20px; /* 内側の余白 */
+  /* margin-bottom: 20px; セクション間の余白 */
+  border-radius: 10px; /* 角を丸くする */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
+}
+
+.markdown_body ol {
+  background-color: #ffffff; /* 白い背景 */
+  padding: 20px; /* 内側の余白 */
+  /* margin-bottom: 20px; セクション間の余白 */
+  border-radius: 10px; /* 角を丸くする */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 軽い影を追加 */
 }
