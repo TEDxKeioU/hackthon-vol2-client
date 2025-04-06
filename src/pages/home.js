@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { 
   Box, 
   Container, 
@@ -17,7 +17,10 @@ import {
   createTheme,
   CssBaseline,
   ToggleButtonGroup,
-  ToggleButton
+  ToggleButton,
+  AppBar,
+  Toolbar,
+  Tooltip
 } from "@mui/material";
 import DeleteIcon from '@mui/icons-material/Delete';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
@@ -26,6 +29,7 @@ import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import WbSunnyIcon from '@mui/icons-material/WbSunny';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
 import ThermostatIcon from '@mui/icons-material/Thermostat';
+import HomeIcon from '@mui/icons-material/Home';
 
 // カスタムテーマの作成
 const theme = createTheme({
@@ -64,8 +68,87 @@ const theme = createTheme({
         },
       },
     },
+    MuiAppBar: {
+      styleOverrides: {
+        root: {
+          borderRadius: 0,
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+        },
+      },
+    },
   },
 });
+
+// ヘッダーコンポーネント
+const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  const isActive = (path) => {
+    return location.pathname === path;
+  };
+  
+  return (
+    <AppBar position="sticky" color="primary" sx={{ mb: 3 }}>
+      <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Typography 
+          variant="h6" 
+          component="div" 
+          sx={{ 
+            fontWeight: 'bold',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 1
+          }}
+        >
+          <RestaurantMenuIcon />
+          ポチレピ
+        </Typography>
+        
+        <Box sx={{ display: 'flex', gap: 1 }}>
+          <Tooltip title="ホーム">
+            <Button 
+              color="inherit"
+              onClick={() => navigate('/')}
+              sx={{ 
+                bgcolor: isActive('/') ? 'rgba(255,255,255,0.2)' : 'transparent',
+                minWidth: '48px'
+              }}
+            >
+              <HomeIcon />
+            </Button>
+          </Tooltip>
+          
+          <Tooltip title="カレンダー">
+            <Button 
+              color="inherit"
+              onClick={() => navigate('/calender')}
+              sx={{ 
+                bgcolor: isActive('/calender') ? 'rgba(255,255,255,0.2)' : 'transparent',
+                minWidth: '48px'
+              }}
+            >
+              <CalendarMonthIcon />
+            </Button>
+          </Tooltip>
+          
+          <Tooltip title="ログイン">
+            <Button 
+              color="inherit"
+              onClick={() => navigate('/login')}
+              sx={{ 
+                bgcolor: isActive('/login') ? 'rgba(255,255,255,0.2)' : 'transparent',
+                minWidth: '48px'
+              }}
+            >
+              <LoginIcon />
+            </Button>
+          </Tooltip>
+        </Box>
+      </Toolbar>
+    </AppBar>
+  );
+};
 
 export default function Home() {
   const [submitText, setSubmitText] = useState("");
@@ -207,26 +290,8 @@ export default function Home() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Container maxWidth="sm" sx={{ py: 3 }}>
-        <Box sx={{ mb: 3, display: 'flex', justifyContent: 'space-between' }}>
-          <Button 
-            variant="contained"
-            startIcon={<CalendarMonthIcon />}
-            onClick={() => navigate('/calender')}
-            sx={{ flex: 1, mr: 1 }}
-          >
-            カレンダー
-          </Button>
-          <Button 
-            variant="contained"
-            startIcon={<LoginIcon />}
-            onClick={() => navigate('/login')}
-            sx={{ flex: 1, ml: 1 }}
-          >
-            ログイン
-          </Button>
-        </Box>
-
+      <Header />
+      <Container maxWidth="sm" sx={{ py: 2 }}>
         <Paper elevation={2} sx={{ p: 2, mb: 2 }}>
           <Typography variant="subtitle2" color="secondary" align="left" gutterBottom>
             今日の天気
@@ -378,7 +443,12 @@ export default function Home() {
           size="large"
           startIcon={<RestaurantMenuIcon />}
           onClick={handleFindRecipe}
-          sx={{ mb: 2, py: 1 }}
+          sx={{ 
+            mb: 2, 
+            py: 1.5, 
+            fontSize: '1.1rem', 
+            boxShadow: '0 4px 8px rgba(255, 204, 0, 0.3)'
+          }}
           fullWidth
         >
           ポチッとレシピ！
