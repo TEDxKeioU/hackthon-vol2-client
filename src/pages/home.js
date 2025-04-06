@@ -85,7 +85,7 @@ export default function Home() {
   const [location, setLocation] = useState(null);
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(true);
-  const API_KEY = "5357ea3fecf3393c86c63b1fbe28fac0";
+  const API_KEY = process.env.WEATHER_API_KEY;
 
   useEffect(() => {
     async function postData() {
